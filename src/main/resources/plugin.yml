@@ -1,0 +1,11 @@
+name: EconomyKqray
+version: '${project.version}'
+main: de.kqray.economykqray.EconomyKqray
+api-version: 1.18
+description: das hier ist ein economy plugin von kqray
+commands:
+  money:
+  addmoney:
+  setmoney:
+  removemoney:
+  pay:
