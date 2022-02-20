@@ -6,9 +6,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.io.IOException;
+
 public class QuitEvent implements Listener {
     @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent event) {
+    public void onPlayerQuit(PlayerQuitEvent event) throws IOException {
         ConfigHandler c = new ConfigHandler();
         Player p = event.getPlayer();
         if (c.getString(p.getUniqueId().toString()+"."+"."+"Money") == null){

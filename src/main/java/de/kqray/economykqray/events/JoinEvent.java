@@ -6,9 +6,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import java.io.IOException;
+
 public class JoinEvent implements Listener {
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
+    public void onPlayerJoin(PlayerJoinEvent event) throws IOException {
         ConfigHandler c = new ConfigHandler();
         Player p = event.getPlayer();
         if (c.getString(p.getUniqueId().toString()+"."+"Money") == null){

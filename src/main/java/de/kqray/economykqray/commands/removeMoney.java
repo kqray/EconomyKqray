@@ -9,6 +9,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.io.IOException;
+
 public class removeMoney implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -26,7 +28,11 @@ public class removeMoney implements CommandExecutor {
                 return true;
             }
             int a = Integer.parseInt(args[0]);
-            mm.removeMoney((Player) sender, a);
+            try {
+                mm.removeMoney((Player) sender, a);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             sender.sendMessage(Messages.playerToPlayer(a, "entfernt"));
 
             return true;
@@ -54,7 +60,11 @@ public class removeMoney implements CommandExecutor {
                     return true;
                 }
                 int a = Integer.parseInt(args[1]);
-                mm.removeMoney((Player) sender, a);
+                try {
+                    mm.removeMoney((Player) sender, a);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 sender.sendMessage(Messages.playerToPlayer(a, "entfernt"));
             }
             try {
@@ -74,6 +84,8 @@ public class removeMoney implements CommandExecutor {
                 sender.sendMessage(Messages.noNumber);
                 return true;
 
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
         }else {

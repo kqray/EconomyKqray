@@ -9,6 +9,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.io.IOException;
+
 public class setMoney implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -26,6 +28,8 @@ public class setMoney implements CommandExecutor {
             }catch (NumberFormatException e){
                 sender.sendMessage(Messages.noNumber);
                 return true;
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
         }else if (args.length == 2){
@@ -47,6 +51,8 @@ public class setMoney implements CommandExecutor {
                 }catch (NumberFormatException e){
                     sender.sendMessage(Messages.noNumber);
                     return true;
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             try {
@@ -62,6 +68,8 @@ public class setMoney implements CommandExecutor {
                 sender.sendMessage(Messages.noNumber);
                 return true;
 
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
         }else {

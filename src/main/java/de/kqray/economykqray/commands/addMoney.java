@@ -9,6 +9,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.io.IOException;
+
 public class addMoney implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -29,6 +31,8 @@ public class addMoney implements CommandExecutor {
             } catch (NumberFormatException e) {
                 sender.sendMessage(Messages.noNumber);
                 return true;
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
 
@@ -50,7 +54,11 @@ public class addMoney implements CommandExecutor {
                     sender.sendMessage(Messages.noNumber);
                     return true;
                 }
-                mm.addMoney((Player) sender, mon);
+                try {
+                    mm.addMoney((Player) sender, mon);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 sender.sendMessage(Messages.playerToPlayer(mon, "hinzugefügt"));
                 return true;
             } else {
@@ -58,7 +66,11 @@ public class addMoney implements CommandExecutor {
                     sender.sendMessage(Messages.noNumber);
                     return true;
                 }
-                mm.addMoney(target, mon);
+                try {
+                    mm.addMoney(target, mon);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 sender.sendMessage(Messages.playThatSend(target, mon, "hinzugefügt"));
                 target.sendMessage(Messages.playerThatTarget((Player) sender, mon, "hinzugefügt"));
             }

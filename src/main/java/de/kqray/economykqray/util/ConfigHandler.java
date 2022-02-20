@@ -2,41 +2,44 @@ package de.kqray.economykqray.util;
 
 import de.kqray.economykqray.EconomyKqray;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+
+import java.io.File;
+import java.io.IOException;
 
 public class ConfigHandler {
-    public FileConfiguration getConfig() {
-        return EconomyKqray.plugin.getConfig();
-    }
+    File f = new File("plugins/EconomyKqray", "config.yml");
+    public FileConfiguration cfg = YamlConfiguration.loadConfiguration(f);
+
     public void setStr(String path, String value){
-        EconomyKqray.plugin.getConfig().set(path, value);
+        cfg.set(path, value);
     }
 
     public void setInt(String path, int value) {
-        EconomyKqray.plugin.getConfig().set(path, value);
+        cfg.set(path, value);
     }
 
     public String getString(String path) {
-        return EconomyKqray.plugin.getConfig().getString(path);
+        return cfg.getString(path);
     }
 
     public int getInt(String path) {
-        return EconomyKqray.plugin.getConfig().getInt(path);
+        return cfg.getInt(path);
     }
 
     public boolean getBoolean(String path) {
-        return EconomyKqray.plugin.getConfig().getBoolean(path);
+        return cfg.getBoolean(path);
     }
 
     public void createSec(String path) {
-        EconomyKqray.plugin.getConfig().createSection(path);
+        cfg.createSection(path);
     }
 
     public void get(String path) {
-        EconomyKqray.plugin.getConfig().get(path);
+        cfg.get(path);
     }
 
-    public void save() {
-        EconomyKqray.plugin.saveConfig();
-        EconomyKqray.plugin.saveDefaultConfig();
+    public void save() throws IOException {
+        cfg.save(f);
     }
 }
