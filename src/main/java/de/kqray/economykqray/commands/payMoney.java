@@ -8,13 +8,17 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
 public class payMoney implements CommandExecutor {
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+
+
         Economy mm = new Economy();
+
         if (!sender.hasPermission("EconomyKqray.payMoney")) {
             sender.sendMessage(Messages.noPerm);
             return true;

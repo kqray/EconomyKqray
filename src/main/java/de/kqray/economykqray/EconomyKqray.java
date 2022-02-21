@@ -5,19 +5,24 @@ import de.kqray.economykqray.events.JoinEvent;
 import de.kqray.economykqray.events.QuitEvent;
 import de.kqray.economykqray.manager.CommandManager;
 import de.kqray.economykqray.util.ConfigHandler;
+import de.kqray.economykqray.util.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
+import java.util.Objects;
 
 
 public final class EconomyKqray extends JavaPlugin {
     public static EconomyKqray plugin;
-
+    public static Economy economy;
     @Override
     public void onEnable() {
+        Economy ec = new Economy();
+
         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GRAY +"--------------------");
         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GRAY +"--------------------");
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN +"Plugin: EconomyKqray Enabled");
@@ -35,6 +40,9 @@ public final class EconomyKqray extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
     }
+    public static Economy getEcon(){
+        return economy;
+    }
 
     private void loadConfig() {
         saveDefaultConfig();
@@ -50,10 +58,10 @@ public final class EconomyKqray extends JavaPlugin {
     }
 
     private void commandRegister() {
-        getCommand("money").setExecutor(new getMoney());
-        getCommand("addmoney").setExecutor(new addMoney());
-        getCommand("setmoney").setExecutor(new setMoney());
-        getCommand("removemoney").setExecutor(new removeMoney());
-        getCommand("pay").setExecutor(new payMoney());
+        Objects.requireNonNull(getCommand("money")).setExecutor(new getMoney());
+        Objects.requireNonNull(getCommand("addmoney")).setExecutor(new addMoney());
+        Objects.requireNonNull(getCommand("setmoney")).setExecutor(new setMoney());
+        Objects.requireNonNull(getCommand("removemoney")).setExecutor(new removeMoney());
+        Objects.requireNonNull(getCommand("pay")).setExecutor(new payMoney());
     }
 }

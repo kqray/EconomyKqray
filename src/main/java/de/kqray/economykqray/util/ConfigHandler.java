@@ -41,4 +41,5 @@ public class ConfigHandler {
     public void save() throws IOException {
         cfg.save(f);
     }
+
 }
