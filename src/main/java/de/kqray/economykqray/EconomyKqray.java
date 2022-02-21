@@ -3,16 +3,13 @@ package de.kqray.economykqray;
 import de.kqray.economykqray.commands.*;
 import de.kqray.economykqray.events.JoinEvent;
 import de.kqray.economykqray.events.QuitEvent;
-import de.kqray.economykqray.manager.CommandManager;
 import de.kqray.economykqray.util.ConfigHandler;
 import de.kqray.economykqray.util.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.IOException;
 import java.util.Objects;
 
 
@@ -47,7 +44,7 @@ public final class EconomyKqray extends JavaPlugin {
     private void loadConfig() {
         saveDefaultConfig();
         saveConfig();
-        CommandManager cm = new CommandManager();
+
 
     }
 

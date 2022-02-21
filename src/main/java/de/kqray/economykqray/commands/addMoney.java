@@ -1,7 +1,6 @@
 package de.kqray.economykqray.commands;
 
 import de.kqray.economykqray.Messages;
-import de.kqray.economykqray.manager.CommandManager;
 import de.kqray.economykqray.util.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -9,13 +8,14 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
 public class addMoney implements CommandExecutor {
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        CommandManager cm = new CommandManager();
+    public boolean onCommand(CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+
 
 
         Economy mm = new Economy();
@@ -57,7 +57,7 @@ public class addMoney implements CommandExecutor {
                 sender.sendMessage(Messages.playerNull);
                 return true;
 
-            } else if (target.getName() == sender.getName()) {
+            } else if (target.getName().equals(sender.getName())) {
                 if (args[1].startsWith("-")) {
                     sender.sendMessage(Messages.noNumber);
                     return true;
