@@ -1,7 +1,8 @@
 package de.kqray.economykqray.commands;
 
 import de.kqray.economykqray.Messages;
-import de.kqray.economykqray.util.MoneyManager;
+import de.kqray.economykqray.manager.CommandManager;
+import de.kqray.economykqray.util.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -14,11 +15,18 @@ import java.io.IOException;
 public class addMoney implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        MoneyManager mm = new MoneyManager();
+        CommandManager cm = new CommandManager();
+
+
+        Economy mm = new Economy();
+        if (!sender.hasPermission("EconomyKqray.addMoney")) {
+            sender.sendMessage(Messages.noPerm);
+            return true;
+        }
         //todo permissuon/ message
         if (args.length == 1) {
             try {
-                if (args[0].startsWith("-")){
+                if (args[0].startsWith("-")) {
                     sender.sendMessage(Messages.noNumber);
                     return true;
                 }
@@ -50,7 +58,7 @@ public class addMoney implements CommandExecutor {
                 return true;
 
             } else if (target.getName() == sender.getName()) {
-                if (args[1].startsWith("-")){
+                if (args[1].startsWith("-")) {
                     sender.sendMessage(Messages.noNumber);
                     return true;
                 }
@@ -62,7 +70,7 @@ public class addMoney implements CommandExecutor {
                 sender.sendMessage(Messages.playerToPlayer(mon, "hinzugefügt"));
                 return true;
             } else {
-                if (args[0].startsWith("-")){
+                if (args[0].startsWith("-")) {
                     sender.sendMessage(Messages.noNumber);
                     return true;
                 }
@@ -77,7 +85,7 @@ public class addMoney implements CommandExecutor {
 
 
         } else {
-            sender.sendMessage(ChatColor.RED+"comamnd usage /addmoney <value>, /addmoney <value> <player>");
+            sender.sendMessage(ChatColor.RED + "commandUsage /addmoney <value>, /addmoney <value> <player>");
         }
         return true;
     }

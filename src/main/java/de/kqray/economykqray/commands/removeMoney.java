@@ -1,7 +1,7 @@
 package de.kqray.economykqray.commands;
 
 import de.kqray.economykqray.Messages;
-import de.kqray.economykqray.util.MoneyManager;
+import de.kqray.economykqray.util.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -14,16 +14,19 @@ import java.io.IOException;
 public class removeMoney implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        MoneyManager mm = new MoneyManager();
-
-        if (args.length == 1){
-            if (args[0].startsWith("-")){
+        Economy mm = new Economy();
+        if (!sender.hasPermission("EconomyKqray.removeMoney")) {
+            sender.sendMessage(Messages.noPerm);
+            return true;
+        }
+        if (args.length == 1) {
+            if (args[0].startsWith("-")) {
                 sender.sendMessage(Messages.noNumber);
                 return true;
             }
             try {
                 int a = Integer.parseInt(args[0]);
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 sender.sendMessage(Messages.noNumber);
                 return true;
             }
@@ -37,8 +40,8 @@ public class removeMoney implements CommandExecutor {
 
             return true;
 
-        }else if (args.length == 2){
-            if (args[1].startsWith("-")){
+        } else if (args.length == 2) {
+            if (args[1].startsWith("-")) {
                 sender.sendMessage(Messages.noNumber);
                 return true;
             }
@@ -48,14 +51,14 @@ public class removeMoney implements CommandExecutor {
                 sender.sendMessage(Messages.playerNull);
                 return true;
             }
-            if (target.getName() == sender.getName()){
-                if (args[1].startsWith("-")){
+            if (target.getName() == sender.getName()) {
+                if (args[1].startsWith("-")) {
                     sender.sendMessage(Messages.noNumber);
                     return true;
                 }
                 try {
                     int a = Integer.parseInt(args[1]);
-                }catch (NumberFormatException e){
+                } catch (NumberFormatException e) {
                     sender.sendMessage(Messages.noNumber);
                     return true;
                 }
@@ -68,11 +71,11 @@ public class removeMoney implements CommandExecutor {
                 sender.sendMessage(Messages.playerToPlayer(a, "entfernt"));
             }
             try {
-                if (mm.getMoney(target) <= 0){
-                    sender.sendMessage(ChatColor.RED+"Der ausgewählte Spieler hat nichts mehr zu entfernen");
+                if (mm.getMoney(target) <= 0) {
+                    sender.sendMessage(ChatColor.RED + "Der ausgewählte Spieler hat nichts mehr zu entfernen");
                     return true;
                 }
-                if (args[1].startsWith("-")){
+                if (args[1].startsWith("-")) {
                     sender.sendMessage(Messages.noNumber);
                     return true;
                 }
@@ -88,8 +91,8 @@ public class removeMoney implements CommandExecutor {
                 e.printStackTrace();
             }
 
-        }else {
-            sender.sendMessage(ChatColor.RED+"CommandUsage: /removemoney <value>, /removemoney <player> <value>");
+        } else {
+            sender.sendMessage(ChatColor.RED + "commandUsage /removemoney <value>, /removemoney <player> <value>");
         }
         return false;
     }

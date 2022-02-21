@@ -1,7 +1,7 @@
 package de.kqray.economykqray.commands;
 
 import de.kqray.economykqray.Messages;
-import de.kqray.economykqray.util.MoneyManager;
+import de.kqray.economykqray.util.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -13,12 +13,19 @@ public class getMoney implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         //todo permmision und nachricht
-
-        MoneyManager mm = new MoneyManager();
+        if (!(sender.hasPermission("EconomyKqray.getSelfMoney"))) {
+            sender.sendMessage(Messages.noPerm);
+            return true;
+        }
+        Economy mm = new Economy();
         if (args.length < 1) {
             sender.sendMessage(Messages.senderMoney(mm.getMoney((Player) sender)));
             return true;
         } else if (args.length == 1) {
+            if (!(sender.hasPermission("EconomyKqray.getTargetMoney"))) {
+                sender.sendMessage(Messages.noPerm);
+                return true;
+            }
 
             Player target = Bukkit.getPlayer(args[0]);
             if (target == null) {
@@ -34,7 +41,7 @@ public class getMoney implements CommandExecutor {
             sender.sendMessage(Messages.targetMoney(target, mm.getMoney(target)));
 
         } else {
-            sender.sendMessage(ChatColor.RED +"comamnd Usage /money , /money <player>");
+            sender.sendMessage(ChatColor.RED + "commandUsage /money , /money <player>");
         }
 
 

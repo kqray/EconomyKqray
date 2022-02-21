@@ -1,5 +1,6 @@
 package de.kqray.economykqray.events;
 
+import de.kqray.economykqray.manager.CommandManager;
 import de.kqray.economykqray.util.ConfigHandler;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,9 +14,9 @@ public class JoinEvent implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) throws IOException {
         ConfigHandler c = new ConfigHandler();
         Player p = event.getPlayer();
-        if (c.getString(p.getUniqueId().toString()+"."+"Money") == null){
-            c.setInt(p.getUniqueId().toString()+"."+p.getName()+"."+"Money", 0);
-
+        if (c.getString(p.getUniqueId().toString() + "." + "Money") == null) {
+            c.setInt(p.getUniqueId().toString() + "." + p.getName() + "." + "Money", 0);
+            CommandManager cm = new CommandManager();
             c.save();
         }
     }

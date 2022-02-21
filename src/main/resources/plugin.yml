@@ -5,7 +5,43 @@ api-version: 1.18
 description: das hier ist ein economy plugin von kqray
 commands:
   money:
+    usage: 'commandUsage /money , /money <player>'
+    aliases:
+      - balance
+      - coins
   addmoney:
+    usage: 'commandUsage /addmoney <value>, /addmoney <value> <player>'
+    aliases:
+      - moneyadd
+      - givemoney
+      - addm
   setmoney:
+    usage: 'commandUsage /setmoney <player> <value>, /setmoney <value>'
+    aliases:
+      - moneyset
+      - setm
   removemoney:
+    usage: 'commandUsage /removemoney <value>, /removemoney <player> <value>'
+    aliases:
+      - moneyremove
+      - removem
   pay:
+    usage: 'commandUsage /pay <player> <value>'
+    aliases:
+      - sendmoney
+      - sendm
+permissions:
+  EconomyKqray.*:
+    children:
+      EconomyKqray.addMoney:
+        default: op
+      EconomyKqray.getSelfMoney:
+        default: true
+      EconomyKqray:getTargetMoney:
+        default: op
+      EconomyKqray.payMoney:
+        default: op
+      EconomyKqray.removeMoney:
+        default: op
+      EconomyKqray.setMoney:
+        default: op

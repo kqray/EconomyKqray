@@ -13,8 +13,8 @@ public class QuitEvent implements Listener {
     public void onPlayerQuit(PlayerQuitEvent event) throws IOException {
         ConfigHandler c = new ConfigHandler();
         Player p = event.getPlayer();
-        if (c.getString(p.getUniqueId().toString()+"."+"."+"Money") == null){
-            c.setInt(p.getUniqueId().toString()+"."+"Money", 0);
+        if (c.getString(p.getUniqueId().toString() + "." + "." + "Money") == null) {
+            c.setInt(p.getUniqueId().toString() + "." + "Money", 0);
             c.save();
         }
     }

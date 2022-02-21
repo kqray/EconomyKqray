@@ -1,7 +1,7 @@
 package de.kqray.economykqray.commands;
 
 import de.kqray.economykqray.Messages;
-import de.kqray.economykqray.util.MoneyManager;
+import de.kqray.economykqray.util.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -14,13 +14,16 @@ import java.io.IOException;
 public class payMoney implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        MoneyManager mm = new MoneyManager();
+        Economy mm = new Economy();
+        if (!sender.hasPermission("EconomyKqray.payMoney")) {
+            sender.sendMessage(Messages.noPerm);
+            return true;
+        }
         if (!(sender instanceof Player)) {
             sender.sendMessage(Messages.noPayer);
             return true;
         } else if (args.length == 2) {
             Player p = (Player) sender;
-
 
 
             try {
@@ -32,7 +35,7 @@ public class payMoney implements CommandExecutor {
                     return true;
                 }
                 if (args[1].startsWith("-")) {
-                    sender.sendMessage(ChatColor.RED+"CommandUsage: /pay <player> <value>");
+                    sender.sendMessage(ChatColor.RED + "CommandUsage: /pay <player> <value>");
                     return true;
                 }
 
@@ -52,7 +55,7 @@ public class payMoney implements CommandExecutor {
             }
 
         } else {
-            sender.sendMessage(ChatColor.RED+"CommandUsage: /pay <player> <value>");
+            sender.sendMessage(ChatColor.RED + "commandUsage /pay <player> <value>");
             return true;
         }
         return false;

@@ -1,7 +1,7 @@
 package de.kqray.economykqray.commands;
 
 import de.kqray.economykqray.Messages;
-import de.kqray.economykqray.util.MoneyManager;
+import de.kqray.economykqray.util.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -14,41 +14,45 @@ import java.io.IOException;
 public class setMoney implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        MoneyManager mm = new MoneyManager();
-        if (args.length == 1){
+        Economy mm = new Economy();
+        if (!sender.hasPermission("EconomyKqray.setMoney")) {
+            sender.sendMessage(Messages.noPerm);
+            return true;
+        }
+        if (args.length == 1) {
 
             try {
-                if (args[0].startsWith("-")){
+                if (args[0].startsWith("-")) {
                     sender.sendMessage(Messages.noNumber);
                     return true;
                 }
                 int a = Integer.parseInt(args[0]);
                 mm.setMoney((Player) sender, a);
                 sender.sendMessage(Messages.setMoneySelfTo0((Player) sender, a));
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 sender.sendMessage(Messages.noNumber);
                 return true;
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-        }else if (args.length == 2){
+        } else if (args.length == 2) {
             Player target = Bukkit.getPlayer(args[0]);
 
             if (target == null) {
                 sender.sendMessage(Messages.playerNull);
                 return true;
             }
-            if (target.getName() == sender.getName()){
+            if (target.getName() == sender.getName()) {
                 try {
-                    if (args[1].startsWith("-")){
+                    if (args[1].startsWith("-")) {
                         sender.sendMessage(Messages.noNumber);
                         return true;
                     }
                     int b = Integer.parseInt(args[1]);
                     mm.setMoney((Player) sender, b);
-                    sender.sendMessage(Messages.setMoneySelfTo0((Player) sender,b));
-                }catch (NumberFormatException e){
+                    sender.sendMessage(Messages.setMoneySelfTo0((Player) sender, b));
+                } catch (NumberFormatException e) {
                     sender.sendMessage(Messages.noNumber);
                     return true;
                 } catch (IOException e) {
@@ -56,7 +60,7 @@ public class setMoney implements CommandExecutor {
                 }
             }
             try {
-                if (args[1].startsWith("-")){
+                if (args[1].startsWith("-")) {
                     sender.sendMessage(Messages.noNumber);
                     return true;
                 }
@@ -72,8 +76,8 @@ public class setMoney implements CommandExecutor {
                 e.printStackTrace();
             }
 
-        }else {
-            sender.sendMessage(ChatColor.RED+"CommandUsage: /setmoney <player> <value>, /setmoney <value>");
+        } else {
+            sender.sendMessage(ChatColor.RED + "commandUsage /setmoney <player> <value>, /setmoney <value>");
         }
         return true;
     }

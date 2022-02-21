@@ -1,6 +1,5 @@
 package de.kqray.economykqray.util;
 
-import de.kqray.economykqray.EconomyKqray;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -11,7 +10,7 @@ public class ConfigHandler {
     File f = new File("plugins/EconomyKqray", "config.yml");
     public FileConfiguration cfg = YamlConfiguration.loadConfiguration(f);
 
-    public void setStr(String path, String value){
+    public void setStr(String path, String value) {
         cfg.set(path, value);
     }
 
